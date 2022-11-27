@@ -1,8 +1,16 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
+  const scrollRef = useRef(null);
+  const messages = [
+    "It's over Anakin! I have the high ground.",
+    "YoU uNdErEsTiMaTe My PoWeR!!",
+    "It was said that you would, destroy the Sith, not join them.",
+    "You were my brother, Anakin.",
+  ];
+
   const curves = [
     "M0,192L48,176C96,160,192,128,288,112C384,96,480,96,576,101.3C672,107,768,117,864,138.7C960,160,1056,192,1152,181.3C1248,171,1344,117,1392,90.7L1440,64L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z",
     "M0,192L48,202.7C96,213,192,235,288,213.3C384,192,480,128,576,122.7C672,117,768,171,864,181.3C960,192,1056,160,1152,170.7C1248,181,1344,235,1392,261.3L1440,288L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
@@ -16,172 +24,51 @@ function App() {
   ];
 
   return (
-    <div className="overflow-scroll">
+    <div ref={scrollRef} className="overflow-scroll">
       <div className="snap-mandatory snap-y overflow-scroll h-screen bg-base-200">
-        <div className="snap-center h-screen">
-          <div className="relative h-screen w-screen">
-            <div className="absolute top-0 bg-blue-500 h-12 w-screen" />
-            <svg
-              className="drop-shadow-xl absolute top-11 fill-blue-500 "
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1440 320"
-              preserveAspectRatio="none"
-              height="6rem"
-              width="100%"
-            >
-              <path className="" fill-opacity="1" d={curves[0]}></path>
-            </svg>
-            <svg
-              className="drop-shadow-xl absolute bottom-11 fill-blue-500"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1440 320"
-              preserveAspectRatio="none"
-              height="6rem"
-              width="100%"
-            >
-              <path fill-opacity="1" d={curves[1]}></path>
-            </svg>
-            <div className="absolute bottom-0 bg-blue-500 h-12 w-screen" />
-          </div>
-          <div className="hero h-screen relative -translate-y-full ">
-            <div className="hero-content text-center">
-              <div className="max-w-md">
-                <h1 className="text-5xl font-bold">
-                  It's over Anakin! I have the high ground.
-                </h1>
-                <p className="py-6">
-                  Provident cupiditate voluptatem et in. Quaerat fugiat ut
-                  assumenda excepturi exercitationem quasi. In deleniti eaque
-                  aut repudiandae et a id nisi.
-                </p>
-                <button className="btn btn-primary">Get Started</button>
+        {messages.map(function (message, i) {
+          return (
+            <div className="snap-center h-screen" key={message}>
+              <div className="hero h-screen relative ">
+                <div className="hero-content text-center">
+                  <div className="max-w-md">
+                    <h1 className="text-5xl font-bold">{message}</h1>
+                    <p className="py-6">
+                      Provident cupiditate voluptatem et in. Quaerat fugiat ut
+                      assumenda excepturi exercitationem quasi. In deleniti
+                      eaque aut repudiandae et a id nisi.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="relative h-screen w-screen -translate-y-full">
+                <div className="absolute top-0 bg-blue-500 h-12 w-screen" />
+                <svg
+                  className="drop-shadow-xl absolute top-11 fill-blue-500 "
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 1440 320"
+                  preserveAspectRatio="none"
+                  height="100"
+                  width="100%"
+                >
+                  <path fillOpacity="1" d={curves[i * 2]}></path>
+                </svg>
+                <svg
+                  className="drop-shadow-xl absolute bottom-11 fill-blue-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 1440 320"
+                  preserveAspectRatio="none"
+                  height="100"
+                  width="100%"
+                >
+                  <path fillOpacity="1" d={curves[i * 2 + 1]}></path>
+                </svg>
+                <div className="absolute bottom-0 bg-blue-500 h-12 w-screen" />
               </div>
             </div>
-          </div>
-        </div>
-        <div className="snap-center h-screen">
-          <div className="relative h-screen w-screen">
-            <div className="absolute top-0 bg-blue-500 h-12 w-screen" />
-            <svg
-              className="drop-shadow-xl absolute top-11 fill-blue-500"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1440 320"
-              preserveAspectRatio="none"
-              height="6rem"
-              width="100%"
-            >
-              <path fill-opacity="1" d={curves[2]}></path>
-            </svg>
-            <svg
-              className="drop-shadow-xl absolute bottom-10 fill-blue-500"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1440 320"
-              preserveAspectRatio="none"
-              height="6rem"
-              width="100%"
-            >
-              <path fill-opacity="1" d={curves[3]}></path>
-            </svg>
-            <div className="absolute bottom-0 bg-blue-500 h-11 w-screen" />
-          </div>
-          <div className="hero h-screen relative -translate-y-full ">
-            <div className="hero-content text-center">
-              <div className="max-w-md">
-                <h1 className="text-5xl font-bold">
-                  YoU uNdErEsTiMaTe My PoWeR!!
-                </h1>
-                <p className="py-6">
-                  Provident cupiditate voluptatem et in. Quaerat fugiat ut
-                  assumenda excepturi exercitationem quasi. In deleniti eaque
-                  aut repudiandae et a id nisi.
-                </p>
-                <button className="btn btn-primary">Get Started</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="snap-center h-screen">
-          <div className="relative h-screen w-screen">
-            <div className="absolute top-0 bg-blue-500 h-12 w-screen" />
-            <svg
-              className="drop-shadow-xl absolute top-11 fill-blue-500"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1440 320"
-              preserveAspectRatio="none"
-              height="6rem"
-              width="100%"
-            >
-              <path fill-opacity="1" d={curves[4]}></path>
-            </svg>
-            <svg
-              className="drop-shadow-xl absolute bottom-10 fill-blue-500"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1440 320"
-              preserveAspectRatio="none"
-              height="6rem"
-              width="100%"
-            >
-              <path fill-opacity="1" d={curves[5]}></path>
-            </svg>
-            <div className="absolute bottom-0 bg-blue-500 h-11 w-screen" />
-          </div>
-          <div className="hero h-screen relative -translate-y-full ">
-            <div className="hero-content text-center">
-              <div className="max-w-md">
-                <h1 className="text-5xl font-bold">
-                  It was said that you would, destroy the Sith, not join them.
-                </h1>
-                <p className="py-6">
-                  Provident cupiditate voluptatem et in. Quaerat fugiat ut
-                  assumenda excepturi exercitationem quasi. In deleniti eaque
-                  aut repudiandae et a id nisi.
-                </p>
-                <button className="btn btn-primary">Get Started</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="snap-center h-screen">
-          <div className="relative h-screen w-screen">
-            <div className="absolute top-0 bg-blue-500 h-12 w-screen" />
-            <svg
-              className="drop-shadow-xl absolute top-11 fill-blue-500"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1440 320"
-              preserveAspectRatio="none"
-              height="6rem"
-              width="100%"
-            >
-              <path fill-opacity="1" d={curves[6]}></path>
-            </svg>
-            <svg
-              className="drop-shadow-xl absolute bottom-10 fill-blue-500"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1440 320"
-              preserveAspectRatio="none"
-              height="6rem"
-              width="100%"
-            >
-              <path fill-opacity="1" d={curves[7]}></path>
-            </svg>
-            <div className="absolute bottom-0 bg-blue-500 h-11 w-screen" />
-          </div>
-          <div className="hero h-screen relative -translate-y-full ">
-            <div className="hero-content text-center">
-              <div className="max-w-md">
-                <h1 className="text-5xl font-bold">
-                  You were my brother, Anakin.
-                </h1>
-                <p className="py-6">
-                  Provident cupiditate voluptatem et in. Quaerat fugiat ut
-                  assumenda excepturi exercitationem quasi. In deleniti eaque
-                  aut repudiandae et a id nisi.
-                </p>
-                <button className="btn btn-primary">Get Started</button>
-              </div>
-            </div>
-          </div>
-        </div>
+          );
+        })}
+
         <footer className="footer p-10 bg-blue-500 text-neutral-content snap-center">
           <div>
             <span className="footer-title">Services</span>
