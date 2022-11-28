@@ -3,6 +3,26 @@ import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
+
+  const callback = function (entries: IntersectionObserverEntry[]) {
+    entries.forEach((entry) => {
+      console.log(entry);
+      if (entry.isIntersecting) {
+        entry.target.classList.add("animate-fadeIn");
+      } else {
+        entry.target.classList.remove("animate-fadeIn");
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(callback);
+
+  const targets = document.querySelectorAll(".js-show-on-scroll");
+  targets.forEach(function (target) {
+    target.classList.add("opacity-0");
+    observer.observe(target);
+  });
+
   const scrollRef = useRef(null);
   const messages = [
     "It's over Anakin! I have the high ground.",
@@ -29,7 +49,7 @@ function App() {
         {messages.map(function (message, i) {
           return (
             <div className="snap-center h-screen" key={message}>
-              <div className="hero h-screen relative ">
+              <div className="hero h-screen relative js-show-on-scroll animate-fadeIn">
                 <div className="hero-content text-center">
                   <div className="max-w-md">
                     <h1 className="text-5xl font-bold">{message}</h1>
@@ -70,26 +90,9 @@ function App() {
         })}
 
         <footer className="footer p-10 bg-blue-500 text-neutral-content snap-center">
-          <div>
-            <span className="footer-title">Services</span>
-            <a className="link link-hover">Branding</a>
-            <a className="link link-hover">Design</a>
-            <a className="link link-hover">Marketing</a>
-            <a className="link link-hover">Advertisement</a>
-          </div>
-          <div>
-            <span className="footer-title">Company</span>
-            <a className="link link-hover">About us</a>
-            <a className="link link-hover">Contact</a>
-            <a className="link link-hover">Jobs</a>
-            <a className="link link-hover">Press kit</a>
-          </div>
-          <div>
-            <span className="footer-title">Legal</span>
-            <a className="link link-hover">Terms of use</a>
-            <a className="link link-hover">Privacy policy</a>
-            <a className="link link-hover">Cookie policy</a>
-          </div>
+          <a className="link link-hover footer-title w-1/3">Contact</a>
+          <a className="link link-hover footer-title w-1/3">LinkedIn</a>
+          <a className="link link-hover footer-title w-1/3">GitHub</a>
         </footer>
       </div>
     </div>
