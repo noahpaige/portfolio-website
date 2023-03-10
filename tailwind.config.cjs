@@ -8,12 +8,17 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        fadeIn: "fadeIn 1s ease-in forwards"
+        fadeIn: "fadeIn 1s ease-in forwards",
+        slideDown: "slideDown 1s ease-in forwards"
       },
       keyframes: {
         fadeIn: {
           "0%": { opacity: 0 },
           "100%": {  opacity: 1 }
+        },
+        slideDown: {
+          "0%": { position: 'absolute', display: 'none', transform: 'translateY(100%)' },
+          "100%": { position: 'relative', display: 'block', transform: 'translateY(0%)'}
         }
       },
     },
