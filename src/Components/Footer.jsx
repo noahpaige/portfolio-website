@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function MyFooter() {
+export default function MyFooter() {
   return (
     <footer className="footer p-10 bg-blue-500 text-neutral-content snap-center">
       <a className="link link-hover">GITHUB</a>
@@ -11,4 +11,3 @@ function MyFooter() {
   );
 }
 
-export default MyFooter;

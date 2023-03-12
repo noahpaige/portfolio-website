@@ -8,7 +8,7 @@ import MyFooter from "../Components/Footer";
 //todo:
 // - create 'screen' component that occupies a full screen
 
-function App() {
+export default function App() {
   return (
     <div className="overflow-scroll">
       <div className="snap-mandatory snap-y overflow-scroll h-screen bg-base-200">
@@ -18,11 +18,12 @@ function App() {
         <div className="snap-center h-screen w-screen">
           <Work />
         </div>
+        <div className="snap-center h-screen w-screen">
+          <About />
+        </div>
         <div className="snap-center h-screen w-screen">About</div>
         <MyFooter />
       </div>
     </div>
   );
 }
-
-export default App;
